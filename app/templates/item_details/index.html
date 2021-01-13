@@ -1,0 +1,249 @@
+{% extends 'wrapper.html' %}
+{% block header %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<link rel="stylesheet" href="../../static/item_details/css/style.css">
+{% endblock %}
+{% block body %}
+<div class="main_section">
+    <div class="main_section_container">
+        <div class="main_section_left">
+            <div class="img_container img_container_1" style="background: url(../../static/uploads/{{ post.image }}) no-repeat center center; background-size: cover;"></div>
+        </div>
+        <div class="main_section_right">
+            <div class="post_title_rating">
+                <div class="post_title">{{ post.name }}</div>
+                <div class="post_rate">(5 reviews)</div>
+            </div>
+            <div class="post_price_active">
+                <div class="post_price">${{ post.price }}</div>
+                <div class="post_active">
+                {% if post.isActive == 'on' %}
+                    <span class="active">Instock</span>
+                {% else %}
+                    <span class="missing">Missing</span>
+                {% endif %}
+                </div>
+            </div>
+            <div class="description">
+                <span class="description_text">Description: </span><span class="description_post">{{ post.description }}</span> 
+            </div>
+            <div class="model">
+                <span class="model_text">The model is wearing size:  </span>
+                <span class="model_size">S </span>
+                <span class="model_text">- Model hight: </span>
+                <span class="model_size">185cm</span>
+            </div>
+            <form action="" class="form" method="post">
+                <div class="colors_row">
+                    {% if post.color %}
+                        <div class="color color_1">
+                            <label>
+                                <input value="{{ post.color }}" type="radio" name="color">
+                                <span style="cursor: pointer;">{{ post.color }}</span>
+                                <span class="after_input" style="background-color: {{ post.color }};"><i class="fas fa-check"></i></span>
+                            </label>
+                        </div>
+                    {% endif %}
+                    {% if post.color_1 %}
+                        <div class="color color_2">
+                            <label>
+                                <input value="{{ post.color_1 }}" type="radio" name="color">
+                                <span style="cursor: pointer;">{{ post.color_1 }}</span>
+                                <span class="after_input" style="background-color: {{ post.color_1 }}"><i class="fas fa-check"></i></span>
+                            </label>
+                        </div>
+                    {% endif %}
+                    {% if post.color_2 %}
+                        <div class="color color_3">
+                            <label>
+                                <input value="{{ post.color_2 }}" type="radio" name="color">
+                                <span style="cursor: pointer;">{{ post.color_2 }}</span>
+                                <span class="after_input" style="background-color: {{ post.color_2 }}"><i class="fas fa-check"></i></span>
+                            </label>
+                        </div>
+                    {% endif %}
+                    {% if post.color_3 %}
+                        <div class="color color_4">
+                            <label>
+                                <input value="{{ post.color_3 }}" type="radio" name="color">
+                                <span style="cursor: pointer;">{{ post.color_3 }}</span>
+                                <span class="after_input" style="background-color: {{ post.color_3 }}"><i class="fas fa-check"></i></span>
+                            </label>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="sizes_row">
+                   {% if post.os == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="OS" autocomplete="off" name="size" id="os">
+                        <label for="os" class="control-label size-label">OS</label>
+                    </div>
+                    {% endif %}
+                    {% if post.xs == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="XS" autocomplete="off" name="size" id="xs">
+                        <label for="xs" class="control-label size-label">XS</label>
+                    </div>
+                    {% endif %}
+                    {% if post.s == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="S" autocomplete="off" name="size" id="s">
+                        <label for="s" class="control-label size-label">S</label>
+                    </div>
+                    {% endif %}
+                    {% if post.m == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="M" autocomplete="off" name="size" id="m">
+                        <label for="m" class="control-label size-label">M</label>
+                    </div>
+                    {% endif %}
+                    {% if post.l == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="L" autocomplete="off" name="size" id="l">
+                        <label for="l" class="control-label size-label">L</label>
+                    </div>
+                    {% endif %}
+                    {% if post.xl == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="XL" autocomplete="off" name="size" id="xl">
+                        <label for="xl" class="control-label size-label">XL</label>
+                    </div>
+                    {% endif %}
+                    {% if post.xxl == 'on' %}
+                    <div class="form-group">
+                        <input type="radio" class="form-control size" value="XXL" autocomplete="off" name="size" id="xxl">
+                        <label for="xxl" class="control-label size-label">XXL</label>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="guide mt-2">
+                    <a href="#" role="alert">Guide</a>
+                </div>
+                <div class="number_wish">
+                    <div class="number_box">
+                        <div class="number_box_minus number_box_controlers"><i class="fas fa-minus"></i></div>
+                        <div class="number_box_input"><input class="input_number" min="1" type="number" value="1" name="count"></div>
+                        <div class="number_box_plus number_box_controlers"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="wish_box">
+                        <label class="wish_label">
+                            
+                            <div class="heart"><i class="far fa-heart"></i></div>
+                            <div class="wish_text">
+                                Add to wishlist
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="button_container">
+                    <button type="submit" name="Product_done" role="button" class="button_form">Add to Cart</button>
+                </div>
+                <input type="text" value="off" name="wish_list" id="wish" class="wish">
+            </form>
+            <div class="tags">
+                
+            </div>
+            <div class="sku_links">
+                <div class="share_footer">
+                    <div data-network="facebook" class="st-custom-button"><i class="fab fa-facebook-f"></i></div>
+                    <div data-network="twitter" class="st-custom-button"><i class="fab fa-twitter"></i></div>
+                    <div data-network="whatsapp" class="st-custom-button"><i class="fab fa-whatsapp"></i></div>
+                    <div data-network="email" class="st-custom-button"><i class="far fa-envelope"></i></div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs" id="myList" role="tablist">
+                <li class="active"><a data-toggle="tab" href="#home" role="tab">Description</a></li>
+                <li><a data-toggle="tab" href="#messages" role="tab">Reviews</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active fade in" id="home" role="tabpanel">
+                  <div class="description" style="line-height: 1.8em;">
+                    <span class="description_text">Description: </span><span class="description_post">{{ post.description }}</span> 
+                </div>
+              </div>
+                <div class="tab-pane fade" id="messages" role="tabpanel">
+                   <div class="messages">
+                       {% for message in comments.items %}
+                        <div class="message_container">
+                           <div class="message_date">{{message.month}} {{ message.created.day }}, {{ message.created.year }}</div>
+                           <div class="message_username">{{ message.user_name }}</div>
+                           <div class="message_text">{{ message.review }}</div>
+                           <div class="message_rating">
+                            {% for star in range(message.rating) %}
+                               <span class="star">★</span>
+                            {% endfor %}
+                           </div>
+                        </div>
+                        {% endfor %}
+                        <div class="message_controllers">
+                            <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="./?page={{comments.prev_num}}" {% if not comments.has_prev %} style="display: none;" {% endif %}>
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+
+                            {% for page in comments.iter_pages() %}
+                                <li  {% if page == comments.page %} class="page-item active" {% else %} class="page-item" {% endif %}><a class="page-link" href="./?page={{page}}">{{page}}</a></li>
+                            {% endfor %}
+
+                            <li class="page-item">
+                              <a class="page-link" href="./?page={{comments.next_num}}" {% if not comments.has_next %} style="display: none;" {% endif %}>
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                   </div>
+                    <div class="comments_title">
+                        Add your review
+                    </div>
+                    <form action="" class="form form_2 mt-4" id="comment_form" autocomplete="off" novalidate>
+                        <div id="post_slug">{{ post.slug }}</div>
+                       <div class="rate mb-4">
+                            <div class="rate_title">Vote: </div>
+                            <div class="rate-group ml-3">
+                                <input class="form-control input_rate_star" type="radio" id="5" name="vote" value="5">
+                                <label class="control-label label_rating" for="5"></label>
+                                <input class="form-control input_rate_star" type="radio" id="4" name="vote" value="4">
+                                <label class="control-label label_rating" for="4"></label>
+                                <input class="form-control input_rate_star" type="radio" id="3" name="vote" value="3">
+                                <label class="control-label label_rating" for="3"></label>
+                                <input class="form-control input_rate_star" type="radio" id="2" name="vote" value="2">
+                                <label class="control-label label_rating" for="2"></label>
+                                <input class="form-control input_rate_star" type="radio" id="1" name="vote" value="1">
+                                <label class="control-label label_rating" for="1"></label>
+                            </div>
+                       </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label mb-3" for="name">Your Name</label>
+                            <input class="form-control" name="name" id="name" type="text" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="control-label  mb-3" for="email">Your Mail</label>
+                            <input class="form-control" name="email" id="email" type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-3" for="review">Your Review</label>
+                            <textarea name="review" maxlength="5000" id="review" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="button_container_2">
+                                <button type="submit" name="Message_done" role="button" class="button_form" id="button_comment">Add Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="ul">
+    
+</ul>
+{% endblock %}
+{% block footer %}
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+<script src="../../static/item_details/js/script.js"></script>
+{% endblock %}
